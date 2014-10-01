@@ -1,4 +1,4 @@
-## docker-node-api ##
+## node-api-exp-02 ##
 
   Experimental source used for Docker CI exploration.
 
