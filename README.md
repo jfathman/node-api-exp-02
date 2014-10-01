@@ -1,4 +1,15 @@
-node-api-exp-02
-===============
+## docker-node-api ##
 
-Node.js REST API Experimental Source for Docker CI Exploration
+  Experimental source used for Docker CI exploration.
+
+  * REST API
+  * Express 4
+  * Microservices architecture
+
+### Docker ###
+
+### Test ###
+
+### License ###
+
+  MIT
