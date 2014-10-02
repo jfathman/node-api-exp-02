@@ -33,7 +33,7 @@ Run bash in Docker container:
 ### Jenkins Execute Shell Command ###
 
     docker build -t node-api-exp-02:1.0.0 .
-    docker run --name api-02 --rm -i -t -p 8085:8085 node-api-exp-02:1.0.0 grunt
+    docker run --name api-02 --rm -i -p 8085:8085 node-api-exp-02:1.0.0 grunt --no-color
 
 ### Test ###
 
