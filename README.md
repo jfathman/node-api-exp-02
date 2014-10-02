@@ -19,7 +19,7 @@ Run Node app.js in Docker container:
 
 Run Grunt test in Docker container:
 
-    $ sudo docker run --name api-02 --rm -i -t -p 8085:8085 node-api-exp-02:1.0.0 ./node_modules/.bin/grunt
+    $ sudo docker run --name api-02 --rm -i -t -p 8085:8085 node-api-exp-02:1.0.0 grunt
 
 Run bash in Docker container:
 
