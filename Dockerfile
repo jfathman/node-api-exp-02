@@ -6,7 +6,6 @@ MAINTAINER jfathman
 
 RUN apt-get update           >/install.log
 RUN apt-get -y upgrade      >>/install.log 2>&1
-RUN apt-get -y install git  >>/install.log 2>&1
 RUN apt-get -y install wget >>/install.log 2>&1
 
 RUN \
@@ -20,9 +19,9 @@ RUN \
 
 WORKDIR /src
 
-RUN git clone https://github.com/jfathman/node-api-exp-02.git
+ADD . /src/node-api-exp-02/
 
-WORKDIR /src/node-api-exp-02
+WORKDIR /src/node-api-exp-02/
 
 RUN npm install >>/install.log
 
