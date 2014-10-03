@@ -5,6 +5,7 @@
   * REST API
   * Express 4
   * Microservices architecture
+  * Docker
   * Jenkins CI
   * API mock test
 
