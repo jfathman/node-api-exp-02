@@ -2,9 +2,10 @@
 
   Experimental source used for Docker CI exploration.
 
-  * REST API
-  * Express 4
+  * REST API application
   * Microservices architecture
+  * Node.js
+  * Express 4
   * Docker
   * Jenkins CI
   * API mock test
