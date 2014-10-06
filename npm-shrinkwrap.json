@@ -754,6 +754,11 @@
         }
       }
     },
+    "grunt-express-server": {
+      "version": "0.4.19",
+      "from": "grunt-express-server@",
+      "resolved": "https://registry.npmjs.org/grunt-express-server/-/grunt-express-server-0.4.19.tgz"
+    },
     "grunt-mocha-test": {
       "version": "0.12.1",
       "from": "grunt-mocha-test@",

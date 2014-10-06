@@ -14,6 +14,8 @@ var cookieParser = require('cookie-parser');
 
 var port = process.env.HTTP_PORT || 8085;
 
+console.log('app mode:', process.env.NODE_ENV);
+
 var app = express();
 
 app.use(bodyParser.json());
@@ -62,6 +64,7 @@ app.delete(apiUrl + '/:domain/:user', function(req, res) {
 // start server
 
 app.listen(port, function() {
+  // grunt-express-server waits for 'server started' to begin mock test
   console.log(Date(), 'server started port:', port);
 });
 
