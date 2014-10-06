@@ -4,9 +4,9 @@
 
   * REST API application
   * Microservices architecture
+  * API mock test using Mocha, Chai, Supertest, Loadtest
   * Node.js
   * Express 4
-  * API mock test using Mocha, Chai, Supertest, Loadtest
   * Docker
   * Jenkins CI
 
