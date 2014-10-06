@@ -858,6 +858,38 @@
         }
       }
     },
+    "loadtest": {
+      "version": "1.2.3",
+      "from": "loadtest@",
+      "resolved": "https://registry.npmjs.org/loadtest/-/loadtest-1.2.3.tgz",
+      "dependencies": {
+        "prototypes": {
+          "version": "0.2.4",
+          "from": "prototypes@*",
+          "resolved": "https://registry.npmjs.org/prototypes/-/prototypes-0.2.4.tgz"
+        },
+        "agentkeepalive": {
+          "version": "0.1.5",
+          "from": "agentkeepalive@0.1.*",
+          "resolved": "https://registry.npmjs.org/agentkeepalive/-/agentkeepalive-0.1.5.tgz"
+        },
+        "log": {
+          "version": "1.4.0",
+          "from": "log@1.4.*",
+          "resolved": "https://registry.npmjs.org/log/-/log-1.4.0.tgz"
+        },
+        "stdio": {
+          "version": "0.2.3",
+          "from": "stdio@^0.2.1",
+          "resolved": "https://registry.npmjs.org/stdio/-/stdio-0.2.3.tgz"
+        },
+        "testing": {
+          "version": "0.1.10",
+          "from": "testing@*",
+          "resolved": "https://registry.npmjs.org/testing/-/testing-0.1.10.tgz"
+        }
+      }
+    },
     "mocha": {
       "version": "1.21.4",
       "from": "mocha@",

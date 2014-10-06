@@ -16,6 +16,8 @@ var port = process.env.HTTP_PORT || 8085;
 
 console.log('app mode:', process.env.NODE_ENV);
 
+var testMode = process.env.NODE_ENV === 'test';
+
 var app = express();
 
 app.use(bodyParser.json());
@@ -23,18 +25,24 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 app.use(function(req, res, next) {
-  console.log(Date(), req.method, req.url);
+  if (!testMode) {
+    console.log(Date(), req.method, req.url);
+  }
   var user = basicAuth(req);
   if (typeof user === 'undefined' || typeof user.name === 'undefined' || typeof user.pass === 'undefined') {
-    console.log(Date(), 'auth rejected:', 'missing credentials');
-    res.statusCode = 401;
-    res.end('Unauthorized');
+    if (!testMode) {
+      console.log(Date(), 'auth rejected:', 'missing credentials');
+    }
+    res.sendStatus(401);
   } else if (user.name !== 'jmf' || user.pass !== '1234') {
-    console.log(Date(), 'auth rejected:', user.name, user.pass);
-    res.statusCode = 401;
-    res.end('Unauthorized');
+    if (!testMode) {
+      console.log(Date(), 'auth rejected:', user.name, user.pass);
+    }
+    res.sendStatus(401);
   } else {
-    console.log(Date(), 'auth accepted:', user.name, user.pass);
+    if (!testMode) {
+      console.log(Date(), 'auth accepted:', user.name, user.pass);
+    }
     next();
   }
 });
@@ -59,6 +67,15 @@ app.post(apiUrl + '/:domain/:user', function(req, res) {
 
 app.delete(apiUrl + '/:domain/:user', function(req, res) {
   res.send(req.method + ' domain: ' + req.params.domain + ' user: ' + req.params.user + '\n');
+});
+
+// catch-all handler for invalid routes
+
+app.use(function(req, res) {
+  if (!testMode) {
+    console.log(Date(), 'invalid:', req.method, req.url);
+  }
+  res.sendStatus(404);
 });
 
 // start server

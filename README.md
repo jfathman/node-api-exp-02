@@ -6,9 +6,9 @@
   * Microservices architecture
   * Node.js
   * Express 4
+  * API mock test using Mocha, Chai, Supertest, Loadtest
   * Docker
   * Jenkins CI
-  * API mock test
 
 ### Docker ###
 
@@ -18,11 +18,11 @@ Build Docker image:
 
 Run Node app.js in Docker container:
 
-    $ sudo docker run --name api-02 --rm -i -t -p 8085:8085 node-api-exp-02:1.0.0
+    $ sudo docker run --name api-02 --rm -i -t -p 8085:8085 -e NODE_ENV=prod node-api-exp-02:1.0.0
 
-Run Grunt test in Docker container:
+Run mock test in Docker container:
 
-    $ sudo docker run --name api-02 --rm -i -t -p 8085:8085 node-api-exp-02:1.0.0 grunt
+    $ sudo docker run --name api-02 --rm -i -t -p 8085:8085 node-api-exp-02:1.0.0 grunt test
 
 Run bash in Docker container:
 
@@ -36,9 +36,9 @@ Run bash in Docker container:
 ### Jenkins Execute Shell Command ###
 
     docker build -t node-api-exp-02:1.0.0 .
-    docker run --name api-02 --rm -i -p 8085:8085 node-api-exp-02:1.0.0 grunt --no-color
+    docker run --name api-02 --rm -i -p 8085:8085 node-api-exp-02:1.0.0 grunt test --no-color
 
-### Test ###
+### Manual Curl Test ###
 
     $ curl --user jmf:1234 http://<ip>:8085/api/v1/abc/123 -i -X GET
 

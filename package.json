@@ -21,6 +21,7 @@
     "grunt-express-server": "^0.4.19",
     "grunt-mocha-test": "^0.12.1",
     "grunt-shell": "^1.1.1",
+    "loadtest": "^1.2.3",
     "mocha": "^1.21.4",
     "supertest": "^0.14.0"
   }
