@@ -42,6 +42,10 @@ Run Node app.js in production mode in Docker container:
 
     $ curl --user jmf:1234 http://<ip>:8085/api/v1/abc/123 -i -X GET
 
+### Force Rebuild ###
+
+Test.
+
 ### License ###
 
   MIT
