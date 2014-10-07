@@ -8,23 +8,22 @@ RUN apt-get update           >/install.log
 RUN apt-get -y upgrade      >>/install.log 2>&1
 RUN apt-get -y install wget >>/install.log 2>&1
 
-RUN \
-  cd /opt && \
-  wget -q http://nodejs.org/dist/v0.10.32/node-v0.10.32-linux-x64.tar.gz && \
-  tar -xzf node-v0.10.32-linux-x64.tar.gz && \
-  mv node-v0.10.32-linux-x64 node && \
-  cd /usr/local/bin && \
-  ln -s /opt/node/bin/* . && \
-  rm -f /opt/node-v0.10.32-linux-x64.tar.gz
+ENV NODE_VERSION 0.10.32
 
-WORKDIR /src
+RUN cd /opt \
+  && wget -q http://nodejs.org/dist/v${NODE_VERSION}/node-v${NODE_VERSION}-linux-x64.tar.gz \
+  && tar -xzf node-v${NODE_VERSION}-linux-x64.tar.gz \
+  && rm -f node-v${NODE_VERSION}-linux-x64.tar.gz \
+  && mv node-v${NODE_VERSION}-linux-x64 node \
+  && cd /usr/local/bin \
+  && ln -s /opt/node/bin/* .
 
-ADD . /src/node-api-exp-02/
+COPY . /opt/node-api-exp-02/
 
-WORKDIR /src/node-api-exp-02/
+WORKDIR /opt/node-api-exp-02/
 
 RUN npm install >>/install.log
 
-RUN ln -s /src/node-api-exp-02/node_modules/.bin/* /usr/local/bin/.
+RUN ln -s /opt/node-api-exp-02/node_modules/.bin/* /usr/local/bin/.
 
 CMD ["node", "app.js"]
