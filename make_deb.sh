@@ -41,6 +41,7 @@ rm -rf ./deb-build
 
 mkdir -p ./deb-build/DEBIAN
 mkdir -p ./deb-build/usr/local/exp/node-api-exp-02
+mkdir -p ./deb-build/usr/local/exp/node-api-exp-02/node_modules
 
 cp app.js              ./deb-build/usr/local/exp/node-api-exp-02/.
 cp package.json        ./deb-build/usr/local/exp/node-api-exp-02/.
