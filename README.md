@@ -17,7 +17,7 @@ Build Docker image:
 
     $ sudo docker build -t node-api-exp-02:1.0.0 .
 
-Remove dangling images when Docker build takes repo:tag away leaving untagged:
+Remove untagged images after Docker reuses repo:tag for new build:
 
     $ sudo docker rmi $(sudo docker images --filter "dangling=true" -q)
 
