@@ -17,6 +17,10 @@ Build Docker image:
 
     $ sudo docker build -t node-api-exp-02:1.0.0 .
 
+Remove dangling images when Docker build takes repo:tag away leaving untagged:
+
+    $ sudo docker rmi $(sudo docker images --filter "dangling=true" -q)
+
 Retrieve build artifacts from Docker container:
 
     $ sudo docker run --rm -v ${PWD}:/mnt node-api-exp-02:1.0.0 /bin/bash -c 'cp artifacts/* /mnt/.'
@@ -41,6 +45,7 @@ Run bash in Docker container:
 ### Jenkins Execute Shell Command ###
 
     docker build -t node-api-exp-02:1.0.0 .
+    docker rmi $(docker images --filter "dangling=true" -q)
     docker run --rm node-api-exp-02:1.0.0 grunt --no-color test
     mkdir -p artifacts
     docker run --rm -v ${PWD}/artifacts:/mnt node-api-exp-02:1.0.0 /bin/bash -c 'cp artifacts/* /mnt/.'
