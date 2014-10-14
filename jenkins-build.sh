@@ -56,13 +56,25 @@ docker run --rm -v ${PWD}/artifacts:/mnt ${APP_NAME}:${APP_VERSION} /bin/bash -c
 
 set +x
 echo
-echo "Tag Docker image for Artifactory, push image to Artifactory, and remove tag."
+echo "Tag Docker image for Artifactory.:"
 echo
 set -x
 
 docker tag ${APP_NAME}:${APP_VERSION} ${ARTIFACTORY_ACCOUNT}.artifactoryonline.com/${APP_NAME}:${APP_VERSION}
 
+set +x
+echo
+echo "Push Docker image to Artifactory."
+echo
+set -x
+
 docker push ${ARTIFACTORY_ACCOUNT}.artifactoryonline.com/${APP_NAME}:${APP_VERSION}
+
+set +x
+echo
+echo "Remove tag added for Artifactory."
+echo
+set -x
 
 docker rmi ${ARTIFACTORY_ACCOUNT}.artifactoryonline.com/${APP_NAME}:${APP_VERSION}
 
