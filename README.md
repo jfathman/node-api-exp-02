@@ -8,8 +8,8 @@
   * Node.js
   * Express 4
   * Docker
-  * Jenkins CI
-  * Artifactory artifact repository
+  * Jenkins CI server
+  * Artifactory repository manager
   * Ubuntu Server 14.04 LTS 64-bit
 
 ### Docker ###
@@ -43,18 +43,24 @@ Run bash in Docker container:
     $ sudo usermod -a -G docker jenkins
     $ sudo service jenkins restart
 
+### Permit Jenkins to access Artifactory ###
+
+    $ cat /var/lib/jenkins/.dockercfg 
+    {
+      "https://${account_name}.artifactoryonline.com": {
+        "auth":"base64encodedUser:Password",
+        "email":"user@example.com"
+      }
+    }
+
 ### Jenkins Execute Shell Command ###
 
-    docker build -t node-api-exp-02:1.0.0 .
-    docker rmi $(docker images --filter "dangling=true" -q)
-    docker run --rm node-api-exp-02:1.0.0 grunt --no-color test
-    mkdir -p artifacts
-    docker run --rm -v ${PWD}/artifacts:/mnt node-api-exp-02:1.0.0 /bin/bash -c 'cp artifacts/* /mnt/.'
-    # cp ./artifacts/* /some/artifact/repository/path/.
+    export ARTIFACTORY_ACCOUNT=${account_name}
+    bash ${WORKSPACE}/jenkins-build.sh
 
 ### Manual Curl Test ###
 
-    $ curl --user jmf:1234 http://<ip>:8085/api/v1/abc/123 -i -X GET
+    $ curl --user jmf:1234 http://{ip}:8085/api/v1/abc/123 -i -X GET
 
 ### License ###
 
