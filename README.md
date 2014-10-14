@@ -9,6 +9,7 @@
   * Express 4
   * Docker
   * Jenkins CI
+  * Artifactory artifact repository
   * Ubuntu Server 14.04 LTS 64-bit
 
 ### Docker ###
