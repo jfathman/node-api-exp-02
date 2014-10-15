@@ -6,6 +6,7 @@ MAINTAINER jfathman
 
 RUN apt-get update               >/install.log 2>&1
 RUN apt-get -y upgrade          >>/install.log 2>&1
+RUN apt-get -y install jq       >>/install.log 2>&1
 RUN apt-get -y install wget     >>/install.log 2>&1
 RUN apt-get -y install fakeroot >>/install.log 2>&1
 
