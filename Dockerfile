@@ -29,6 +29,6 @@ RUN ln -s /opt/node-api-exp-02/node_modules/.bin/* /usr/local/bin/.
 
 RUN mkdir -p ./artifacts
 
-RUN ./make_deb.sh 0 && mv *.deb ./artifacts
+RUN ./make-deb.sh 0 && mv *.deb ./artifacts
 
 CMD ["node", "app.js"]

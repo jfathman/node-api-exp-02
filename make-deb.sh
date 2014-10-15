@@ -1,12 +1,16 @@
 #! /bin/bash
 
-# make_deb.sh
+# make-deb.sh
 
 set -e
 
-PACKAGE="node-api-exp-02"
+# Build .deb installer using app name and version from package.json.
 
-DESCRIPTION="API Example"
+PACKAGE=$(cat package.json | jq -r '.name')
+
+VERSION=$(cat package.json | jq -r '.version')
+
+DESCRIPTION="REST API Microservice"
 
 ORGANIZATION="Acme Labs"
 
@@ -14,9 +18,12 @@ PLATFORM=ubuntu
 
 ARCH=all
 
-VERSION=$(node -e 'console.log(require("./package.json").version)')
+if [ ! -z "$PACKAGE" ]; then
+  echo "ERROR: package.json app name undefined"
+  exit 1
+fi
 
-if [ "$VERSION" == "undefined" ]; then
+if [ ! -z "$VERSION" ]; then
   echo "ERROR: package.json app version undefined"
   exit 1
 fi
@@ -40,15 +47,15 @@ fi
 rm -rf ./deb-build
 
 mkdir -p ./deb-build/DEBIAN
-mkdir -p ./deb-build/usr/local/exp/node-api-exp-02
-mkdir -p ./deb-build/usr/local/exp/node-api-exp-02/node_modules
+mkdir -p ./deb-build/usr/local/exp/${PACKAGE}
+mkdir -p ./deb-build/usr/local/exp/${PACKAGE}/node_modules
 
-cp app.js              ./deb-build/usr/local/exp/node-api-exp-02/.
-cp package.json        ./deb-build/usr/local/exp/node-api-exp-02/.
-cp npm-shrinkwrap.json ./deb-build/usr/local/exp/node-api-exp-02/.
+cp app.js              ./deb-build/usr/local/exp/${PACKAGE}/.
+cp package.json        ./deb-build/usr/local/exp/${PACKAGE}/.
+cp npm-shrinkwrap.json ./deb-build/usr/local/exp/${PACKAGE}/.
 
 cat << EOF >./deb-build/DEBIAN/install
-/usr/local/exp/node-api-exp-02
+/usr/local/exp/${PACKAGE}
 EOF
 
 cat << EOF >./deb-build/DEBIAN/preinst
@@ -59,15 +66,15 @@ chmod 755 ./deb-build/DEBIAN/preinst
 
 cat << EOF >./deb-build/DEBIAN/postinst
 #! /bin/sh
-id node-api-exp-02 >/dev/null 2>&1
+id ${PACKAGE} >/dev/null 2>&1
 if [ \$? -ne 0 ]; then
-  useradd --shell /bin/bash --password node-api-exp-02 -m node-api-exp-02
+  useradd --shell /bin/bash --password ${PACKAGE} -m ${PACKAGE}
 fi
-chown node-api-exp-02:node-api-exp-02 /usr/local/exp/node-api-exp-02
-chown node-api-exp-02:node-api-exp-02 /usr/local/exp/node-api-exp-02/node_modules
-chown node-api-exp-02:node-api-exp-02 /usr/local/exp/node-api-exp-02/app.js
-chown node-api-exp-02:node-api-exp-02 /usr/local/exp/node-api-exp-02/package.json
-chown node-api-exp-02:node-api-exp-02 /usr/local/exp/node-api-exp-02/npm-shrinkwrap.json
+chown ${PACKAGE}:${PACKAGE} /usr/local/exp/${PACKAGE}
+chown ${PACKAGE}:${PACKAGE} /usr/local/exp/${PACKAGE}/node_modules
+chown ${PACKAGE}:${PACKAGE} /usr/local/exp/${PACKAGE}/app.js
+chown ${PACKAGE}:${PACKAGE} /usr/local/exp/${PACKAGE}/package.json
+chown ${PACKAGE}:${PACKAGE} /usr/local/exp/${PACKAGE}/npm-shrinkwrap.json
 EOF
 
 chmod 755 ./deb-build/DEBIAN/postinst
