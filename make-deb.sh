@@ -18,12 +18,12 @@ PLATFORM=ubuntu
 
 ARCH=all
 
-if [ ! -z "$PACKAGE" ]; then
+if [ -z "$PACKAGE" ]; then
   echo "ERROR: package.json app name undefined"
   exit 1
 fi
 
-if [ ! -z "$VERSION" ]; then
+if [ -z "$VERSION" ]; then
   echo "ERROR: package.json app version undefined"
   exit 1
 fi
