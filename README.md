@@ -58,6 +58,15 @@ Run bash in Docker container:
     export ARTIFACTORY_ACCOUNT=${account_name}
     bash ${WORKSPACE}/jenkins-build.sh
 
+    export ARTIFACTORY_ACCOUNT=estech
+    bash ${WORKSPACE}/jenkins-build.sh
+    set +x # do not log auth credentials
+    curl --progress-bar -o artifacts/build.log -u ${userId}:${apiToken} ${BUILD_URL}/consoleText
+
+### Jenkins Published Artifacts ###
+
+    ${WORKSPACE}/artifacts/*
+
 ### Manual Curl Test ###
 
     $ curl --user jmf:1234 http://{ip}:8085/api/v1/abc/123 -i -X GET
