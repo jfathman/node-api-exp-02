@@ -71,10 +71,6 @@ Run bash in Docker container:
 
     $ curl --user jmf:1234 http://{ip}:8085/api/v1/abc/123 -i -X GET
 
-### Force Build ###
-
-    Test.
-
 ### License ###
 
   MIT
