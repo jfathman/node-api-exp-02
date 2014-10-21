@@ -7,6 +7,9 @@
     "type": "git",
     "url": "https://github.com/jfathman/node-api-exp-02"
   },
+  "engines": {
+    "node": "v0.10.32"
+  },
   "dependencies": {
     "basic-auth": "^1.0.0",
     "body-parser": "^1.9.0",
